@@ -1,0 +1,42 @@
+[
+  {
+    "id": "maria-r",
+    "nombre": "María R.",
+    "iglesia": "Iglesia Central",
+    "testimonio": "MINAFAM transformó nuestra familia. Llegamos en crisis y encontramos amor, consejería y una comunidad que nos apoyó en todo momento.",
+    "imagen": "/images/testimonio-maria.jpg",
+    "categoria": "matrimonios"
+  },
+  {
+    "id": "juan-l",
+    "nombre": "Juan L.",
+    "iglesia": "Ministerio Jóvenes",
+    "testimonio": "Los jóvenes encontramos aquí un hogar espiritual. Los líderes nos guían con amor y nos retan a ser mejores cada día.",
+    "imagen": "/images/testimonio-juan.jpg",
+    "categoria": "jóvenes"
+  },
+  {
+    "id": "pedro-sara",
+    "nombre": "Pedro y Sara G.",
+    "iglesia": "Ministerio Matrimonios",
+    "testimonio": "El retiro matrimonial nos dio las herramientas que necesitábamos. Hoy nuestro matrimonio es más fuerte que nunca.",
+    "imagen": "/images/testimonio-pedro.jpg",
+    "categoria": "matrimonios"
+  },
+  {
+    "id": "carlos-m",
+    "nombre": "Carlos M.",
+    "iglesia": "Iglesia Norte",
+    "testimonio": "Como padre, encontré en MINAFAM el apoyo que necesitaba para guiar a mis hijos en fe. Los programas para niños son excelentes.",
+    "imagen": "/images/testimonio-carlos.jpg",
+    "categoria": "niños"
+  },
+  {
+    "id": "rosa-s",
+    "nombre": "Rosa S.",
+    "iglesia": "Ministerio Servicio Social",
+    "testimonio": "El ministerio de servicio social me mostró que puedo impactar vidas mientras sirvo. He encontrado mi propósito.",
+    "imagen": "/images/testimonio-rosa.jpg",
+    "categoria": "servicio"
+  }
+]

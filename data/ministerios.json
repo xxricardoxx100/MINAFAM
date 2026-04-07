@@ -1,0 +1,32 @@
+[
+  {
+    "id": "familias",
+    "nombre": "Familias",
+    "icon": "fa-home",
+    "descripcion": "Acompañamos a las familias en cada etapa de su vida con formación, apoyo pastoral y espacios de crecimiento.",
+    "descriptionLarga": "El ministerio de Familias está enfocado en fortalecer el hogar cristiano, promoviendo relaciones sanas, crianza con propósito y vida espiritual en casa. Trabajamos con padres, hijos y cuidadores para construir familias sólidas que reflejen el amor de Dios.",
+    "actividades": [
+      "Escuela para padres y talleres de crianza",
+      "Encuentros familiares mensuales",
+      "Consejería y acompañamiento pastoral",
+      "Actividades integradoras para toda la familia"
+    ],
+    "lider": "Pastora María López",
+    "contacto": "familias@minafam.org"
+  },
+  {
+    "id": "matrimonios",
+    "nombre": "Matrimonios",
+    "icon": "fa-heart",
+    "descripcion": "Acompañamos y fortalecemos el vínculo matrimonial a través de consejería, retiros y grupos de crecimiento.",
+    "descriptionLarga": "Nuestro ministerio de matrimonios ofrece un programa integral para parejas en diferentes etapas de su relación. Desde parejas que recién comienzan su vida juntos hasta familias establecidas que buscan renovar su pacto.",
+    "actividades": [
+      "Retiros matrimoniales trimestrales",
+      "Grupos de 6 parejas para crecimiento mutuo",
+      "Consejería profesional y pastoral",
+      "Talleres de comunicación y resolución de conflictos"
+    ],
+    "lider": "Pastor Juan Rodríguez",
+    "contacto": "matrimonios@minafam.org"
+  }
+]
