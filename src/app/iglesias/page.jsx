@@ -7,6 +7,9 @@ export const metadata = {
 
 export default function IglesiasPage() {
   const ordenDepartamentos = ['Lima', 'Huancayo', 'Junin'];
+  const etiquetaDepartamento = {
+    Lima: 'Prersbiterio Lima Este',
+  };
 
   const iglesiasPorDepartamento = ordenDepartamentos
     .map((departamento) => ({
@@ -39,7 +42,7 @@ export default function IglesiasPage() {
             {iglesiasPorDepartamento.map((grupo) => (
               <section className="departamento-section" key={grupo.departamento}>
                 <div className="departamento-header">
-                  <h2>{grupo.departamento}</h2>
+                  <h2>{etiquetaDepartamento[grupo.departamento] ?? grupo.departamento}</h2>
                   <span>{grupo.iglesias.length} iglesia(s)</span>
                 </div>
 
@@ -48,7 +51,10 @@ export default function IglesiasPage() {
                     <article className="iglesia-card-full" key={iglesia.id}>
                       <div className="iglesia-imagen">
                         <img
-                          src={`https://placehold.co/500x320/2c3e50/ffffff?text=${encodeURIComponent(iglesia.nombre)}`}
+                          src={
+                            iglesia.imagen ||
+                            `https://placehold.co/500x320/2c3e50/ffffff?text=${encodeURIComponent(iglesia.nombre)}`
+                          }
                           alt={iglesia.nombre}
                         />
                       </div>

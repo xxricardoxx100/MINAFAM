@@ -1,16 +1,16 @@
 [
   {
-    "id": "iglesia-central",
-    "nombre": "Iglesia Central",
+    "id": "IEP-vitarte",
+    "nombre": "I.E.P Vitarte",
     "departamento": "Lima",
-    "direccion": "Av. Principal 123, Centro de la Ciudad",
-    "telefono": "+1 (555) 000-0001",
-    "email": "central@minafam.org",
+    "direccion": "Av. Central 128",
+    "telefono": "",
+    "email": "iepvitarte@minafam.org",
     "servicios": "Domingos 9:00 AM y 11:00 AM",
-    "pastor": "Pastor Juan Rodriguez",
+    "pastor": "Pastor ",
     "miembros": 850,
-    "descripcion": "Nuestra iglesia matriz, ubicada en el corazón de la ciudad. Es un lugar de bienvenida, calor espiritual y comunidad auténtica.",
-    "imagen": "/images/iglesia-central.jpg",
+    "descripcion": "Nuestra iglesia matriz, ubicada en Vitarte. Es un lugar de bienvenida, calor espiritual y comunidad auténtica.",
+    "imagen": "/images/iepvitarte.jpg",
     "coordenadas": { "lat": 40.7128, "lng": -74.0060 }
   },
   {

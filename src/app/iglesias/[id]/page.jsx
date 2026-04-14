@@ -43,7 +43,10 @@ export default function IglesiaDetallePage({ params }) {
             <div className="detalle-main">
               <img
                 className="iglesia-featured-img"
-                src={`https://placehold.co/800x350/2c3e50/ffffff?text=${encodeURIComponent(iglesia.nombre)}`}
+                src={
+                  iglesia.imagen ||
+                  `https://placehold.co/800x350/2c3e50/ffffff?text=${encodeURIComponent(iglesia.nombre)}`
+                }
                 alt={iglesia.nombre}
               />
               <h2>{iglesia.nombre}</h2>

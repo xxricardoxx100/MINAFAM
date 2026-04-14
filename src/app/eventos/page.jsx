@@ -45,7 +45,10 @@ export default function EventosPage() {
               <div className="evento-full-card" key={ev.id}>
                 <div className="evento-full-img">
                   <img
-                    src={`https://placehold.co/350x220/c0392b/ffffff?text=${encodeURIComponent(ev.nombre)}`}
+                    src={
+                      ev.imagen ||
+                      `https://placehold.co/350x220/c0392b/ffffff?text=${encodeURIComponent(ev.nombre)}`
+                    }
                     alt={ev.nombre}
                   />
                   {ev.featured && <span className="evento-badge">Destacado</span>}

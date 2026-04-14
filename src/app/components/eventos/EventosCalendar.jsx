@@ -180,7 +180,10 @@ export default function EventosCalendar({
             <article className="evento-banner" key={eventoPrincipal.id}>
               <div className="evento-banner-media">
                 <img
-                  src={`https://placehold.co/720x360/c0392b/ffffff?text=${encodeURIComponent(eventoPrincipal.nombre)}`}
+                  src={
+                    eventoPrincipal.imagen ||
+                    `https://placehold.co/720x360/c0392b/ffffff?text=${encodeURIComponent(eventoPrincipal.nombre)}`
+                  }
                   alt={eventoPrincipal.nombre}
                 />
                 {eventoPrincipal.featured && <span className="evento-badge">Destacado</span>}
