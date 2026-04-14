@@ -1,11 +1,11 @@
 [
   {
-    "id": "conferencia-2026",
-    "nombre": "Conferencia Familiar 2026",
-    "fecha": "2026-03-22",
+    "id": "DiaNacional",
+    "nombre": "Dia Nacionnal del prebiterio Lima Este",
+    "fecha": "2026-04-31",
     "hora_inicio": "08:00",
     "hora_fin": "17:00",
-    "ubicacion": "Auditorio Central",
+    "ubicacion": "Centro de convenciones Carapongo",
     "iglesia": "iglesia-central",
     "descripcion": "Un encuentro especial donde cientos de familias se reúnen para crecer juntas en fe y amor.",
     "descriptionLarga": "Tres días de adoración, talleres, conferencias magistrales y comunidad. Traeremos oradores nacionales e internacionales para inspirar tu fe.",
