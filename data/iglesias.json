@@ -2,6 +2,7 @@
   {
     "id": "IEP-vitarte",
     "nombre": "I.E.P Vitarte",
+    "activa": true,
     "departamento": "Lima",
     "direccion": "Av. Central 128, Ate",
     "telefono": "",
@@ -16,6 +17,7 @@
   {
     "id": "iglesia-norte",
     "nombre": "Iglesia Norte",
+    "activa": false,
     "departamento": "Lima",
     "direccion": "Calle Principal del Norte 456, Zona Norte",
     "telefono": "+1 (555) 000-0002",
@@ -30,6 +32,7 @@
   {
     "id": "iglesia-sur",
     "nombre": "Iglesia Sur",
+    "activa": false,
     "departamento": "Huancayo",
     "direccion": "Blvd. Sur 789, Zona Sur",
     "telefono": "+1 (555) 000-0003",
@@ -44,6 +47,7 @@
   {
     "id": "iglesia-este",
     "nombre": "Iglesia Este",
+    "activa": false,
     "departamento": "Junin",
     "direccion": "Urb. Este 321, Sector Este",
     "telefono": "+1 (555) 000-0004",
@@ -58,6 +62,7 @@
   {
     "id": "iglesia-pvitarte",
     "nombre": "Iglesia Pvitarte",
+    "activa": false,
     "departamento": "Huancayo",
     "direccion": "Av. Pvitarte 100, Pvitarte",
     "telefono": "+1 (555) 000-0005",
@@ -72,6 +77,7 @@
   {
     "id": "iglesia-villa",
     "nombre": "Iglesia Villa Mía",
+    "activa": false,
     "departamento": "Junin",
     "direccion": "Calle Principal Villa Mía 555, Villa Mía",
     "telefono": "+1 (555) 000-0006",

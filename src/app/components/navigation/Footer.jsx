@@ -29,7 +29,7 @@ export default function Footer() {
             <li><Link href="/ministerios">Ministerios</Link></li>
             <li><Link href="/iglesias">Iglesias</Link></li>
             <li><Link href="/eventos">Eventos</Link></li>
-            <li><Link href="/como-ser-parte">¿Cómo ser parte?</Link></li>
+            <li><Link href="/cursos">Cursos</Link></li>
             <li><Link href="/contacto">Contacto</Link></li>
           </ul>
         </div>
@@ -37,8 +37,10 @@ export default function Footer() {
         <div className="footer-links">
           <h4>Ministerios</h4>
           <ul>
-            <li><Link href="/ministerios/familias">Familias</Link></li>
-            <li><Link href="/ministerios/matrimonios">Matrimonios</Link></li>
+            <li><Link href="/ministerios/familias">Matrimonios y Familias</Link></li>
+            <li><Link href="/ministerios/matrimonios">Jóvenes</Link></li>
+            <li><Link href="/ministerios/matrimonios">Novios</Link></li>
+            <li><Link href="/ministerios/matrimonios">Finanzas</Link></li>
           </ul>
         </div>
 
@@ -53,7 +55,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} MINAFAM – Ministerio de Familias. Todos los derechos reservados.</p>
+        <p>&copy; {new Date().getFullYear()} MINAFAM – Ministerio Nacional de Familias. Todos los derechos reservados.</p>
       </div>
     </footer>
   );

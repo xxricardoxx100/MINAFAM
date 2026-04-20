@@ -6,7 +6,7 @@ const STATS = [
   { value: 15, label: 'Años de ministerio' },
   { value: 6, label: 'Iglesias asociadas' },
   { value: 5000, label: 'Familias impactadas' },
-  { value: 8, label: 'Ministerios activos' },
+  { value: 4, label: 'Ministerios activos' },
 ];
 
 export default function StatsBar() {

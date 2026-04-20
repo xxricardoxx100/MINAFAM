@@ -19,7 +19,7 @@ export default function Navbar() {
     { href: '/eventos', label: 'Eventos' },
     { href: '/ministerios', label: 'Ministerios' },
     { href: '/iglesias', label: 'Iglesias' },
-    { href: '/como-ser-parte', label: '¿Cómo ser parte?' },
+    { href: '/cursos', label: 'Cursos' },
   ];
 
   return (

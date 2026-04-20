@@ -6,6 +6,8 @@ export const metadata = {
 };
 
 export default function IglesiasPage() {
+  const iglesiasActivas = iglesias.filter((iglesia) => iglesia.activa !== false);
+
   const ordenDepartamentos = ['Lima', 'Huancayo', 'Junin'];
   const etiquetaDepartamento = {
     Lima: 'Prersbiterio Lima Este',
@@ -14,7 +16,7 @@ export default function IglesiasPage() {
   const iglesiasPorDepartamento = ordenDepartamentos
     .map((departamento) => ({
       departamento,
-      iglesias: iglesias
+      iglesias: iglesiasActivas
         .filter((iglesia) => iglesia.departamento === departamento)
         .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')),
     }))

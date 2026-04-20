@@ -12,7 +12,7 @@ export default function Hero() {
           a través de la fe, el amor y el servicio. 
         </p>
         <div className="hero-btns">
-          <Link href="/como-ser-parte" className="btn btn-primary">Únete a nosotros</Link>
+          <Link href="/cursos" className="btn btn-primary">Únete a nosotros</Link>
         </div>
       </div>
       <div className="hero-scroll-hint">

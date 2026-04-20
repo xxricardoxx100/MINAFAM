@@ -7,15 +7,14 @@ import EventosPreview from './components/home/EventosPreview';
 import MinisteriosPreview from './components/home/MinisteriosPreview';
 import TestimoniosCarousel from './components/home/TestimoniosCarousel';
 import Link from 'next/link';
+import { expandEventosPorFechas } from '../utils/eventos';
 
 export const metadata = {
   title: 'MINAFAM - Ministero Nacional de matrimonios y familias',
 };
 
 export default function InicioPage() {
-  const eventosProximos = [...eventos].sort(
-    (a, b) => new Date(`${a.fecha}T12:00:00`) - new Date(`${b.fecha}T12:00:00`)
-  );
+  const eventosProximos = expandEventosPorFechas(eventos);
 
   return (
     <>

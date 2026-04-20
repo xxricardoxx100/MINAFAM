@@ -19,6 +19,17 @@ const MESES = [
   'Diciembre',
 ];
 
+const MINISTERIO_COLORS = {
+  'matrimonios y familias': '#c0392b',
+  novios: '#2563eb',
+  jovenes: '#0d9488',
+  finanzas: '#f59e0b',
+  general: '#64748b',
+};
+
+const MIXED_DAY_COLOR = '#7c3aed';
+const DEFAULT_MINISTERIO_COLOR = '#0ea5a4';
+
 function toDate(fecha) {
   return new Date(`${fecha}T12:00:00`);
 }
@@ -28,6 +39,34 @@ function formatDateKey(fecha) {
   const month = String(fecha.getMonth() + 1).padStart(2, '0');
   const day = String(fecha.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
+}
+
+function normalizeMinisterioName(ministerio) {
+  return String(ministerio || 'General')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+    .toLowerCase();
+}
+
+function getMinisterioColor(ministerio) {
+  return MINISTERIO_COLORS[normalizeMinisterioName(ministerio)] || DEFAULT_MINISTERIO_COLOR;
+}
+
+function hexToRgba(hex, alpha) {
+  if (typeof hex !== 'string' || !hex.startsWith('#')) {
+    return `rgba(192,57,43,${alpha})`;
+  }
+
+  const normalized = hex.length === 4
+    ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
+    : hex;
+
+  const r = parseInt(normalized.slice(1, 3), 16);
+  const g = parseInt(normalized.slice(3, 5), 16);
+  const b = parseInt(normalized.slice(5, 7), 16);
+
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
 export default function EventosCalendar({
@@ -55,6 +94,7 @@ export default function EventosCalendar({
   const [fechaSeleccionada, setFechaSeleccionada] = useState(
     eventosOrdenados[0]?.fecha ?? formatDateKey(mesInicial)
   );
+  const [eventoActivoIndex, setEventoActivoIndex] = useState(0);
 
   const eventosPorFecha = useMemo(() => {
     const mapa = new Map();
@@ -84,6 +124,10 @@ export default function EventosCalendar({
     setFechaSeleccionada(formatDateKey(new Date(year, month, 1)));
   }, [mesActual, eventosOrdenados]);
 
+  useEffect(() => {
+    setEventoActivoIndex(0);
+  }, [fechaSeleccionada]);
+
   const year = mesActual.getFullYear();
   const month = mesActual.getMonth();
   const primerDiaSemana = new Date(year, month, 1).getDay();
@@ -94,7 +138,7 @@ export default function EventosCalendar({
   });
 
   const eventosDelDia = eventosPorFecha.get(fechaSeleccionada) ?? [];
-  const eventoPrincipal = eventosDelDia[0] ?? null;
+  const eventoPrincipal = eventosDelDia[eventoActivoIndex] ?? eventosDelDia[0] ?? null;
 
   const eventosEnMesActual = useMemo(
     () =>
@@ -103,6 +147,11 @@ export default function EventosCalendar({
         return fechaEvento.getFullYear() === year && fechaEvento.getMonth() === month;
       }),
     [eventosOrdenados, year, month]
+  );
+
+  const ministeriosEnVista = useMemo(
+    () => [...new Set(eventosOrdenados.map((evento) => evento.ministerio || 'General'))],
+    [eventosOrdenados]
   );
 
   return (
@@ -147,23 +196,51 @@ export default function EventosCalendar({
 
               const fecha = new Date(year, month, dia);
               const dateKey = formatDateKey(fecha);
-              const tieneEvento = eventosPorFecha.has(dateKey);
+              const eventosEnFecha = eventosPorFecha.get(dateKey) ?? [];
+              const cantidadEventos = eventosEnFecha.length;
+              const tieneEvento = cantidadEventos > 0;
+              const esCursoSemanal = eventosEnFecha.some((evento) => evento.totalSesiones > 1);
+              const ministeriosEnFecha = [...new Set(eventosEnFecha.map((evento) => evento.ministerio || 'General'))];
+              const colorDia = ministeriosEnFecha.length > 1
+                ? MIXED_DAY_COLOR
+                : ministeriosEnFecha.length === 1
+                  ? getMinisterioColor(ministeriosEnFecha[0])
+                  : null;
               const esSeleccionada = fechaSeleccionada === dateKey;
+              const estilosDia = colorDia
+                ? {
+                    '--calendar-day-color': colorDia,
+                    '--calendar-day-fill': hexToRgba(colorDia, 0.12),
+                    '--calendar-day-fill-hover': hexToRgba(colorDia, 0.18),
+                    '--calendar-day-fill-selected': hexToRgba(colorDia, 0.28),
+                  }
+                : undefined;
 
               return (
                 <button
                   key={dateKey}
                   type="button"
-                  className={`calendar-day${tieneEvento ? ' has-event' : ''}${esSeleccionada ? ' selected' : ''}`}
+                  className={`calendar-day${tieneEvento ? ' has-event' : ''}${esCursoSemanal ? ' weekly-course' : ''}${esSeleccionada ? ' selected' : ''}`}
+                  style={estilosDia}
                   onClick={() => setFechaSeleccionada(dateKey)}
                   aria-label={
                     tieneEvento
-                      ? `Seleccionar ${dia} de ${MESES[month]}, con evento`
+                      ? `Seleccionar ${dia} de ${MESES[month]}, con ${cantidadEventos} evento${cantidadEventos > 1 ? 's' : ''}`
                       : `Seleccionar ${dia} de ${MESES[month]}`
                   }
                 >
                   <span>{dia}</span>
-                  {tieneEvento && <i className="event-dot"></i>}
+                  {tieneEvento && (
+                    <span className="event-dots" aria-hidden="true">
+                      {eventosEnFecha.slice(0, 3).map((evento, dotIndex) => (
+                        <i
+                          className="event-dot"
+                          key={`${dateKey}-dot-${dotIndex}`}
+                          style={{ backgroundColor: getMinisterioColor(evento.ministerio || 'General') }}
+                        ></i>
+                      ))}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -171,24 +248,83 @@ export default function EventosCalendar({
 
           <div className="calendar-legend">
             <span><i className="legend-box legend-box-outline"></i> Con evento</span>
+            {ministeriosEnVista.map((ministerio) => {
+              const color = getMinisterioColor(ministerio);
+
+              return (
+                <span key={`legend-${ministerio}`}>
+                  <i
+                    className="legend-box legend-box-ministerio"
+                    style={{
+                      borderColor: color,
+                      backgroundColor: hexToRgba(color, 0.2),
+                    }}
+                  ></i>
+                  {ministerio}
+                </span>
+              );
+            })}
             <span><i className="legend-box legend-box-fill"></i> Seleccionado</span>
           </div>
         </div>
 
         <div className="evento-banner-panel">
           {eventoPrincipal ? (
-            <article className="evento-banner" key={eventoPrincipal.id}>
-              <div className="evento-banner-media">
-                <img
-                  src={
-                    eventoPrincipal.imagen ||
-                    `https://placehold.co/720x360/c0392b/ffffff?text=${encodeURIComponent(eventoPrincipal.nombre)}`
-                  }
-                  alt={eventoPrincipal.nombre}
-                />
-                {eventoPrincipal.featured && <span className="evento-badge">Destacado</span>}
-              </div>
+            <article className="evento-banner" key={eventoPrincipal.idSesion || eventoPrincipal.id}>
+              {eventosDelDia.length > 1 ? (
+                <div className="evento-banner-media multi">
+                  <div className="evento-banner-media-grid">
+                    {eventosDelDia.map((evento, index) => (
+                      <button
+                        key={evento.idSesion || evento.id}
+                        type="button"
+                        className={`evento-banner-media-item-btn${eventoActivoIndex === index ? ' active' : ''}`}
+                        onClick={() => setEventoActivoIndex(index)}
+                        aria-label={`Ver detalles de ${evento.nombre}`}
+                      >
+                        <div className="evento-banner-media-item">
+                          <img
+                            src={
+                              evento.imagen ||
+                              `https://placehold.co/720x360/c0392b/ffffff?text=${encodeURIComponent(evento.nombre)}`
+                            }
+                            alt={evento.nombre}
+                          />
+                          {evento.featured && <span className="evento-badge">Destacado</span>}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="evento-banner-media">
+                  <img
+                    src={
+                      eventoPrincipal.imagen ||
+                      `https://placehold.co/720x360/c0392b/ffffff?text=${encodeURIComponent(eventoPrincipal.nombre)}`
+                    }
+                    alt={eventoPrincipal.nombre}
+                  />
+                  {eventoPrincipal.featured && <span className="evento-badge">Destacado</span>}
+                </div>
+              )}
               <div className="evento-banner-content">
+                {eventosDelDia.length > 1 && (
+                  <div className="evento-banner-switcher" role="tablist" aria-label="Seleccionar evento del día">
+                    {eventosDelDia.map((evento, index) => (
+                      <button
+                        key={`${evento.idSesion || evento.id}-switch`}
+                        type="button"
+                        className={`evento-switch-chip${eventoActivoIndex === index ? ' active' : ''}`}
+                        onClick={() => setEventoActivoIndex(index)}
+                        aria-pressed={eventoActivoIndex === index}
+                      >
+                        Evento {index + 1}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 <p className="evento-banner-date">
                   <i className="fas fa-calendar-alt"></i>
                   {toDate(eventoPrincipal.fecha).toLocaleDateString('es-ES', {
@@ -207,7 +343,9 @@ export default function EventosCalendar({
                 </div>
 
                 {eventosDelDia.length > 1 && (
-                  <p className="evento-extra-count">Hay {eventosDelDia.length - 1} evento(s) adicional(es) en esta fecha.</p>
+                  <p className="evento-extra-count">
+                    Se muestran {eventosDelDia.length} flyers. Estás viendo el evento {eventoActivoIndex + 1} de {eventosDelDia.length}.
+                  </p>
                 )}
 
                 <Link href="/eventos" className="btn btn-sm btn-primary">Ver detalles</Link>

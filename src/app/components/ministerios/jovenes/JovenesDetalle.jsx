@@ -1,22 +1,6 @@
-import ministerios from '../../../../data/ministerios.json';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
-export async function generateStaticParams() {
-  return ministerios.map((m) => ({ id: m.id }));
-}
-
-export async function generateMetadata({ params }) {
-  const m = ministerios.find((x) => x.id === params.id);
-  return { title: m ? `${m.nombre} - MINAFAM` : 'Ministerio - MINAFAM' };
-}
-
-export default function MinisterioDetallePage({ params }) {
-  const ministerio = ministerios.find((m) => m.id === params.id);
-  if (!ministerio) notFound();
-
-  const relacionados = ministerios.filter((m) => m.id !== ministerio.id).slice(0, 3);
-
+export default function JovenesDetalle({ ministerio, relacionados = [] }) {
   return (
     <>
       {/* Page Header */}
@@ -37,7 +21,6 @@ export default function MinisterioDetallePage({ params }) {
       <section className="section">
         <div className="container">
           <div className="detalle-layout">
-            {/* Main Content */}
             <div className="detalle-main">
               <div className="detalle-icon-large">
                 <i className={`fas ${ministerio.icon}`}></i>
@@ -59,7 +42,6 @@ export default function MinisterioDetallePage({ params }) {
               </div>
             </div>
 
-            {/* Sidebar */}
             <aside className="detalle-sidebar">
               <h3>Otros Ministerios</h3>
               <div className="sidebar-cards">
