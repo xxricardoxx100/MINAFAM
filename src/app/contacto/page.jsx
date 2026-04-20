@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import eventos from '../../../data/eventos.json';
@@ -12,7 +12,7 @@ function normalizeText(value) {
     .toLowerCase();
 }
 
-export default function ContactoPage() {
+function ContactoPageContent() {
   const searchParams = useSearchParams();
   const whatsappGroupLink = (process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK || '').trim();
 
@@ -322,5 +322,42 @@ export default function ContactoPage() {
         </div>
       </section>
     </>
+  );
+}
+
+function ContactoPageFallback() {
+  return (
+    <>
+      <section className="page-header">
+        <div className="page-header-overlay"></div>
+        <div className="container">
+          <h1>Contáctanos</h1>
+          <p>Estamos aquí para ayudarte. No dudes en escribirnos.</p>
+          <nav className="breadcrumb" aria-label="breadcrumb">
+            <Link href="/">Inicio</Link>
+            <span>/</span>
+            <span>Contacto</span>
+          </nav>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="contacto-layout">
+            <div className="contacto-form-wrap">
+              <h2>Cargando formulario...</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default function ContactoPage() {
+  return (
+    <Suspense fallback={<ContactoPageFallback />}>
+      <ContactoPageContent />
+    </Suspense>
   );
 }
