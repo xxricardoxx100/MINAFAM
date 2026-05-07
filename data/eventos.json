@@ -134,5 +134,40 @@
     "capacidad": 2000,
     "imagen": "/images/flyercursos/PostFinanzas.png",
     "featured": true
+  },
+  {
+    "id": "CursoMatrimoniosvirtual",
+    "nombre": "Sanando y Fortaleciendo Matrimonios VIRTUAL - 1",
+    "fechas": [
+      "2026-05-23",
+      "2026-05-30",
+      "2026-06-06",
+      "2026-06-13",
+      "2026-06-20",
+      "2026-06-27",
+      "2026-07-04",
+      "2026-07-11",
+      "2026-07-18",
+      "2026-07-25",
+      "2026-08-01",
+      "2026-08-08",
+      "2026-08-15",
+      "2026-08-22",
+      "2026-08-29",
+      "2026-09-05",
+      "2026-09-12",
+      "2026-09-19"
+    ],
+    "hora_inicio": "20:30",
+    "hora_fin": "21:30",
+    "ubicacion": "Virtual- Google Meet",
+    "ministerio": "Matrimonios y Familias",
+    "iglesia": "IEP vitarte",
+    "descripcion": "Instructores: Pr. Jaime Espiritu y Betty Javier",
+    "descriptionLarga": "Dirigido a matrimonios que desean fortalecer y restaurar sus relaciones conforme al diseño de Dios",
+    "precio": "20 soles (por pareja)",
+    "capacidad": 2000,
+    "imagen": "/images/flyercursos/MATRIMONIOSVIRTUAL.png",
+    "featured": true
   }
 ]
